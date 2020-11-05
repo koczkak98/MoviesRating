@@ -32,7 +32,6 @@ public class Rating {
     }
 
 
-
     public Integer getRatingId() {
         return ratingId;
     }
