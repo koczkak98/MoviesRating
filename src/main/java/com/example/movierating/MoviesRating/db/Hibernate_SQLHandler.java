@@ -1,6 +1,7 @@
 package com.example.movierating.MoviesRating.db;
 
 import com.example.movierating.MoviesRating.model.Rating;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -35,6 +36,32 @@ public class Hibernate_SQLHandler {
         /** Execute transaction and Close Session */
         session.getTransaction().commit();
         session.close();
+
+        return rating;
+
+    }
+
+    public Rating deleteRatingByMovieId(int movieID)
+    {
+        Rating rating = new Rating(movieID);
+
+        /** Open Session and Begin Transaction */
+        Session session = sessionFactory.openSession();
+        try {
+            session.beginTransaction();
+
+            rating = session.get(Rating.class, movieID);
+
+            session.delete(rating);
+
+            /** Execute transaction and Close Session */
+            session.getTransaction().commit();
+            session.close();
+        }
+        catch (HibernateException e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
 
         return rating;
 

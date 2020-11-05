@@ -23,12 +23,11 @@ public class MovieRatingController {
          */
 
         /** Hibernate */
+
         Hibernate_SQLHandler hibernate_sqlHandler = new Hibernate_SQLHandler();
         hibernate_sqlHandler.open();
         Rating rating = hibernate_sqlHandler.getRatingByMovieId(movieId);
         hibernate_sqlHandler.close();
-
-
 
         return rating;
 

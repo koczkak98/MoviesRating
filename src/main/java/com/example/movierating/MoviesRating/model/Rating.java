@@ -10,16 +10,22 @@ public class Rating {
     @Column(name = "id")
     private Integer ratingId;
 
-
-    @ManyToOne
-    @JoinColumn(name = "movieId", referencedColumnName = "id")
-    private Integer movieId;
-
     @Column
     private double scores;
 
     @Column(name = "totalScore")
     private double totalScore;
+
+    /**
+    @ManyToOne
+    @JoinColumn(name = "movieId")
+
+    private Movie movieId;
+    */
+
+    @Column(name = "movieId")
+    private Integer movieId;
+
 
     //private double averages;
 
