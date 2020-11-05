@@ -4,7 +4,7 @@ import com.example.movierating.MoviesRating.model.Rating;
 
 import java.sql.*;
 
-public class MySqlHandler {
+public class JDBC_SQLHandler {
 
     private static final String DB_URL = "jdbc:mysql://localhost:3306/movies?serverTimezone=UTC";
     private static final String DB_USER = "root";
@@ -32,7 +32,6 @@ public class MySqlHandler {
             {
                 rating.setScores(rs.getFloat("scores"));
                 rating.setTotalScore(rs.getDouble("totalScore"));
-                rating.setAverages();
 
                 //Exit from rs
                 break;
