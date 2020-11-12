@@ -36,7 +36,7 @@ public class Hibernate_SQLHandler {
 
     }
 
-    public Rating getRatingByMovieId(int ratingID)
+    public Rating getRatingById(int ratingID)
     {
         Rating rating = new Rating(ratingID);
 

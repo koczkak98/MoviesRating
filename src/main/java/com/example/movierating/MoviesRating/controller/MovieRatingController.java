@@ -41,7 +41,7 @@ public class MovieRatingController {
         for (int i = 0; i < ratingIDs.size(); i++)
         {
             hibernate_sqlHandler.open();
-            Rating rating = hibernate_sqlHandler.getRatingByMovieId(ratingIDs.get(i));
+            Rating rating = hibernate_sqlHandler.getRatingById(ratingIDs.get(i));
             hibernate_sqlHandler.close();
             ratingInfo.addRatings(rating);
         }
