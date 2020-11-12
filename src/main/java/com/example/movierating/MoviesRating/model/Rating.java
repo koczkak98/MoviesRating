@@ -8,6 +8,7 @@ public class Rating {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer ratingId;
 
     @Column
@@ -16,18 +17,13 @@ public class Rating {
     @Column(name = "totalScore")
     private double totalScore;
 
-    /**
-    @ManyToOne
-    @JoinColumn(name = "movieId")
-
-    private Movie movieId;
-    */
 
     @Column(name = "movieId")
     private Integer movieId;
 
 
-    //private double averages;
+    @Transient
+    private double averages = ((this.scores / this.totalScore)) * 100;
 
 
     public Rating() {
@@ -70,7 +66,7 @@ public class Rating {
         this.totalScore = totalScore;
     }
 
-    /**
+
     public double getAverages() {
         return averages;
     }
@@ -78,6 +74,6 @@ public class Rating {
     public void setAverages() {
         this.averages = ((this.scores / this.totalScore)) * 100;
     }
-     */
+
 
 }
