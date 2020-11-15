@@ -11,46 +11,24 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 public class MovieRatingController {
 
-    @GetMapping("/getrating/{movieId}")
-    public RatingInfo getRating (
-            @PathVariable("movieId") int movieID) throws SQLException
+    @GetMapping("/getrating/{ratingId}")
+    public Rating getRating (
+            @PathVariable("ratingId") int ratingID) throws SQLException
     {
-        /** JDBC */
-        /**
-        JDBC_SQLHandler JDBCSQLHandler = new JDBC_SQLHandler();
-        Rating rating = JDBCSQLHandler.getRatingById(movieId);
-         */
 
-        /** Hibernate */
-
-        RatingInfo ratingInfo = new RatingInfo();
         Hibernate_SQLHandler hibernate_sqlHandler = new Hibernate_SQLHandler();
-        RestTemplate restTemplate = new RestTemplate();
-        Movie movie = restTemplate.getForObject("http://localhost:8081/getmovie/"+movieID, Movie.class);
-
-        List<Integer> ratingIDs = movie.getRatingIDs();
-        System.out.println(ratingIDs);
-
-
-        for (int i = 0; i < ratingIDs.size(); i++)
-        {
-            hibernate_sqlHandler.open();
-            Rating rating = hibernate_sqlHandler.getRatingById(ratingIDs.get(i));
-            hibernate_sqlHandler.close();
-            ratingInfo.addRatings(rating);
-        }
+        hibernate_sqlHandler.open();
+        Rating rating = hibernate_sqlHandler.getRatingById(ratingID);
+        rating.setAverages();
+        hibernate_sqlHandler.close();
 
 
-        System.out.println(ratingIDs);
-        System.out.println(ratingInfo.getRatings());
-
-        return ratingInfo;
+        return rating;
 
     }
 

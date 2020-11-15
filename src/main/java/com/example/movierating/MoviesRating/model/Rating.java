@@ -17,11 +17,6 @@ public class Rating {
     @Column(name = "totalScore")
     private double totalScore;
 
-
-    @Column(name = "movieId")
-    private Integer movieId;
-
-
     @Transient
     private double averages = ((this.scores / this.totalScore)) * 100;
 
@@ -29,8 +24,8 @@ public class Rating {
     public Rating() {
     }
 
-    public Rating(Integer movieId) {
-        this.movieId = movieId;
+    public Rating(Integer id) {
+        this.ratingId = id;
     }
 
 
@@ -40,14 +35,6 @@ public class Rating {
 
     public void setRatingId(Integer ratingId) {
         this.ratingId = ratingId;
-    }
-
-    public Integer getMovieId() {
-        return movieId;
-    }
-
-    public void setMovieId(Integer movieId) {
-        this.movieId = movieId;
     }
 
     public double getScores() {

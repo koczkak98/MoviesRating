@@ -47,16 +47,11 @@ public class Hibernate_SQLHandler {
 
             rating = session.get(Rating.class, ratingID);
 
-
-            /** Execute transaction and Close Session */
-            session.getTransaction().commit();
-            session.close();
         }
         catch (HibernateException e) {
             e.printStackTrace();
             session.getTransaction().rollback();
         }
-
 
         /** Execute transaction and Close Session */
         session.getTransaction().commit();
