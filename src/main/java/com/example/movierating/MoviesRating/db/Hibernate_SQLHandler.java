@@ -61,45 +61,22 @@ public class Hibernate_SQLHandler {
 
     }
 
-    public List<Rating> deleteRatingByMovieId(int movieID)
+    public Rating deleteRatingByMovieId(int ratingID)
     {
+        Rating rating = new Rating();
+        rating = getRatingById(ratingID);
+
         /** Open Session and Begin Transaction */
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        /** Prepare Criteria */
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Rating> criteria = builder.createQuery( Rating.class );
+        session.delete(rating);
 
-        /** Prepare HQL Statement */
-        Root<Rating> fromTable = criteria.from(Rating.class);
-
-        Predicate condition = builder.between( fromTable.get("movieId") , movieID , movieID);
-        CriteriaQuery<Rating> hqlStatement = criteria.select(fromTable).where(condition);
-        TypedQuery<Rating> query = session.createQuery(hqlStatement);
-
-        /** Execute HQL Statement */
-        List<Rating> results = query.getResultList();
-        try {
-            for (int i = 0; i < results.size(); i++) {
-                session.delete(results.get(i));
-            }
-        }
-        catch (NoResultException e) {
-            results = new ArrayList<Rating>();
-        }
-        catch (NonUniqueResultException e) {
-            results = new ArrayList<Rating>();
-        }
-        catch (Exception e)
-        {
-            results = new ArrayList<Rating>();
-        }
         /** Execute transaction and Close Session */
         session.getTransaction().commit();
         session.close();
 
-        return results;
+        return rating;
 
     }
 

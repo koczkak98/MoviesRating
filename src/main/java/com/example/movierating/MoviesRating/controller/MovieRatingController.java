@@ -33,15 +33,16 @@ public class MovieRatingController {
     }
 
 
-    @GetMapping("/deleterating/{movieid}")
-    public RatingInfo deleteMovieById (
-            @PathVariable("movieid") int movieID)
+    @GetMapping("/deleterating/{ratingid}")
+    public Rating deleteMovieById (
+            @PathVariable("ratingid") int ratingID)
     {
-        RatingInfo rating = new RatingInfo();
 
         Hibernate_SQLHandler hibernate_sqlHandler = new Hibernate_SQLHandler();
         hibernate_sqlHandler.open();
-        rating.setRatings(hibernate_sqlHandler.deleteRatingByMovieId(movieID));
+        System.out.println(ratingID);
+        Rating rating = hibernate_sqlHandler.deleteRatingByMovieId(ratingID);
+        System.out.println("DELETE");
         hibernate_sqlHandler.close();
 
         return rating;
